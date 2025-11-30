@@ -42,7 +42,7 @@
 //     return line;
 // }
 
-int main() {
+int readtxt() {
     char **lines = NULL;
     int num_lines = 0;
     int capacity = INITIAL_CAPACITY;
@@ -113,3 +113,55 @@ int main() {
 
     return 0;
 }
+
+// return lines and num_lines_out in parameter
+// int readtxt(const char *filename, char ***lines_out, int *num_lines_out) {
+//     char **lines = NULL;
+//     int num_lines = 0;
+//     int capacity = INITIAL_CAPACITY;
+//
+//     // Open file
+//     FILE *file = fopen(filename, "r");
+//     if (file == NULL) {
+//         printf("Error: Could not open file\n");
+//         return 1;
+//     }
+//
+//     // Allocate initial array
+//     lines = (char **)malloc(capacity * sizeof(char *));
+//     if (lines == NULL) {
+//         printf("Error: Memory allocation failed\n");
+//         fclose(file);
+//         return 1;
+//     }
+//
+//     // Read file line by line
+//     char *line;
+//     while ((line = read_line(file)) != NULL) {
+//         // Grow array if needed
+//         if (num_lines >= capacity) {
+//             capacity *= 2;
+//             char **temp = (char **)realloc(lines, capacity * sizeof(char *));
+//             if (temp == NULL) {
+//                 printf("Error: Memory reallocation failed\n");
+//                 free(line);
+//                 for (int i = 0; i < num_lines; i++) {
+//                     free(lines[i]);
+//                 }
+//                 free(lines);
+//                 fclose(file);
+//                 return 1;
+//             }
+//             lines = temp;
+//         }
+//         lines[num_lines] = line;
+//         num_lines++;
+//     }
+//     fclose(file);
+//
+//     // Return the array and count to caller
+//     *lines_out = lines;
+//     *num_lines_out = num_lines;
+//
+//     return 0;  // Success
+// }
