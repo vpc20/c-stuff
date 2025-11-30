@@ -4,7 +4,7 @@
 
 #include "aoc_tools.h"
 
-// the delimiter can be any one of the char in delim or the whole string itself
+// the delimiter can be any one of the char in delim or the whole delim itself
 char **str_split(const char *str, const char *delim) {
     // Make a copy since strtok modifies the string
     char *str_copy = malloc(strlen(str) + 1);
