@@ -1,8 +1,8 @@
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "tools.h"
+
 #define INITIAL_CAPACITY 10
 
 char **input_to_grid(const char *filename) {

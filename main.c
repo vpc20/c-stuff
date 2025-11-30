@@ -1,9 +1,8 @@
 #include <stdio.h>
-#include "aoc_tools.h"
-// #include "read_text.c"
-
 #include <stdlib.h>
 #include <string.h>
+
+#include "aoc_tools.h"
 
 char **str_split(char *str, char delim) {
     // Make a copy since strtok modifies the string
@@ -72,6 +71,43 @@ int main(int argc, char *argv[]) {
     for (int i = 0; str_arr[i] != NULL; i++) {
         printf("%d: %s\n", i, str_arr[i]);
     }
+
+    char *substr;
+    substring(substr, "qwerasdf", 0, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 1, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 2, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 3, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 4, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 5, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 6, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 7, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 8, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 0, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 8, 4);
+    printf("%s\n", substr);
+
+    substring(substr, "qwerasdf", 0, 4);
+    printf("%s\n", substr);
 
     return 0;
 }
