@@ -3,71 +3,15 @@
 #include <string.h>
 
 #include "aoc_tools.h"
+#include "tools.h"
 
-// the delimiter can be any one of the char in delim or the whole delim itself
-char **str_split(const char *str, const char *delim) {
-    // Make a copy since strtok modifies the string
-    char *str_copy = malloc(strlen(str) + 1);
-    if (!str_copy) return NULL;
-    strcpy(str_copy, str);
-
-    // Count tokens first
-    int count = 0;
-    char *token = strtok(str_copy, delim);
-    while (token != NULL) {
-        count++;
-        token = strtok(NULL, delim);
-    }
-
-    // Allocate array
-    char **str_arr = malloc((count + 1) * sizeof(char *));
-    if (!str_arr) {
-        free(str_copy);
-        return NULL;
-    }
-
-    // Copy string again for second pass
-    strcpy(str_copy, str);
-
-    // Split and store tokens
-    int idx = 0;
-    token = strtok(str_copy, delim);
-    while (token != NULL) {
-        str_arr[idx] = malloc(strlen(token) + 1);
-        strcpy(str_arr[idx], token);
-        idx++;
-        token = strtok(NULL, delim);
-    }
-
-    str_arr[idx] = NULL;
-    free(str_copy);
-    return str_arr;
-}
 
 int main(int argc, char *argv[]) {
     printf("Hello, World!\n");
 
     //-------------------------------------------------------------------------
-    // char **grid = input_to_grid("/home/vpc/CLionProjects/c-stuff/input.txt");
-    //
-    // // Print the 2D array
-    // // printf("File contents (%d lines):\n", num_lines);
-    // printf("------------------------\n");
-    // for (int i = 0; grid[i] != NULL; i++) {
-    //     printf("Line %d: %s\n", i, grid[i]);
-    // }
-    //
-    // // Access individual characters
-    // printf("\n--- Accessing as 2D array ---\n");
-    // for (int i = 0; grid[i] != NULL; i++) {
-    //     printf("Line %d characters: ", i);
-    //     for (int j = 0; grid[i][j] != '\0'; j++) {
-    //         printf("%c ", grid[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-    // free(grid)
-
+    char **grid = input_to_grid("/home/vpc/CLionProjects/c-stuff/input.txt");
+    print_grid(grid, " ");
 
     //-------------------------------------------------------------------------
     // Single character delimiter
@@ -77,34 +21,34 @@ int main(int argc, char *argv[]) {
     }
     free(parts);
 
-    // Multi-character delimiter
-    parts = str_split("apple::banana::cherry", "::");
-    for (int i = 0; parts[i] != NULL; i++) {
-        printf("%s\n", parts[i]);
-    }
-    free(parts);
-
-    // Multiple delimiter characters (splits on ANY of them)
-    parts = str_split("apple,banana;cherry", ",;");
-    for (int i = 0; parts[i] != NULL; i++) {
-        printf("%s\n", parts[i]);
-    }
-    free(parts);
-
-    // Whitespace delimiters
-    parts = str_split("apple banana\tcherry", " \t");
-    for (int i = 0; parts[i] != NULL; i++) {
-        printf("%s\n", parts[i]);
-    }
-    free(parts);
-
-    printf("last one\n");
-    // Whitespace delimiters
-    parts = str_split("apple,banana;cherry,;grapes", ",;");
-    for (int i = 0; parts[i] != NULL; i++) {
-        printf("%s\n", parts[i]);
-    }
-    free(parts);
+    // // Multi-character delimiter
+    // parts = str_split("apple::banana::cherry", "::");
+    // for (int i = 0; parts[i] != NULL; i++) {
+    //     printf("%s\n", parts[i]);
+    // }
+    // free(parts);
+    //
+    // // Multiple delimiter characters (splits on ANY of them)
+    // parts = str_split("apple,banana;cherry", ",;");
+    // for (int i = 0; parts[i] != NULL; i++) {
+    //     printf("%s\n", parts[i]);
+    // }
+    // free(parts);
+    //
+    // // Whitespace delimiters
+    // parts = str_split("apple banana\tcherry", " \t");
+    // for (int i = 0; parts[i] != NULL; i++) {
+    //     printf("%s\n", parts[i]);
+    // }
+    // free(parts);
+    //
+    // printf("last one\n");
+    // // Whitespace delimiters
+    // parts = str_split("apple,banana;cherry,;grapes", ",;");
+    // for (int i = 0; parts[i] != NULL; i++) {
+    //     printf("%s\n", parts[i]);
+    // }
+    // free(parts);
 
     //-------------------------------------------------------------------------
     // char *substr;
@@ -143,6 +87,24 @@ int main(int argc, char *argv[]) {
     //
     // substring(substr, "qwerasdf", 0, 4);
     // printf("%s\n", substr);
+
+    //-------------------------------------------------------------------------
+    // you can use strcpy to copy char *s to char s1[] before trimming
+    char s1[] = "  asdf   ";
+    char *trimmed = ltrim(s1);
+    printf("ltrim '%s'\n", trimmed);
+
+    // char *s2 = "  asdf   ";
+    // s2 = ltrim(s2);
+    // printf("ltrim '%s'\n", s2);
+
+    char s3[] = "  asdf   ";
+    rtrim(s3);
+    printf("rtrim '%s'\n", s3);
+
+    char s5[] = "  asdf   ";
+    char *trimmeds5 = trim(s5);
+    printf("trim '%s'\n", trimmeds5);
 
     return 0;
 }

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 // Returns a new substring from start index with specified length
 // Returns NULL on error
@@ -37,7 +38,7 @@
 //     return substr;
 // }
 
-
+// -------------------------------------------------------------------------------
 // Caller provides the buffer (no allocation needed)
 void substring(char *dest, const char *src, int start, int length) {
     // No malloc, no free needed
@@ -45,6 +46,70 @@ void substring(char *dest, const char *src, int start, int length) {
     dest[length] = '\0';
 }
 
+// -------------------------------------------------------------------------------
+// Trim leading whitespace
+char *ltrim(char *s) {
+    while (isspace((unsigned char)*s))
+        s++;
+    return s;
+}
+
+// Trim trailing whitespace
+char *rtrim(char *s) {
+    char *back = s + strlen(s) - 1;
+    while (back >= s && isspace((unsigned char)*back))
+        back--;
+    *(back + 1) = '\0';
+    return s;
+}
+
+// Trim both leading and trailing whitespace
+char *trim(char *s) {
+    return rtrim(ltrim(s));
+}
+
+// -------------------------------------------------------------------------------
+// the delimiter can be any one of the char in delim or the whole delim itself
+char **str_split(const char *str, const char *delim) {
+    // Make a copy since strtok modifies the string
+    char *str_copy = malloc(strlen(str) + 1);
+    if (!str_copy) return NULL;
+    strcpy(str_copy, str);
+
+    // Count tokens first
+    int count = 0;
+    char *token = strtok(str_copy, delim);
+    while (token != NULL) {
+        count++;
+        token = strtok(NULL, delim);
+    }
+
+    // Allocate array
+    char **str_arr = malloc((count + 1) * sizeof(char *));
+    if (!str_arr) {
+        free(str_copy);
+        return NULL;
+    }
+
+    // Copy string again for second pass
+    strcpy(str_copy, str);
+
+    // Split and store tokens
+    int idx = 0;
+    token = strtok(str_copy, delim);
+    while (token != NULL) {
+        str_arr[idx] = malloc(strlen(token) + 1);
+        strcpy(str_arr[idx], token);
+        idx++;
+        token = strtok(NULL, delim);
+    }
+
+    str_arr[idx] = NULL;
+    free(str_copy);
+    return str_arr;
+}
+
+// -------------------------------------------------------------------------------
 // Function to read a line of arbitrary length
 char *read_line(FILE *file) {
     size_t capacity = INITIAL_LINE_SIZE;
@@ -78,4 +143,16 @@ char *read_line(FILE *file) {
 
     line[len] = '\0';
     return line;
+}
+
+// -------------------------------------------------------------------------------
+void print_grid(char **grid, char *delim) {
+    printf("\n---print_grid---\n");
+    for (int i = 0; grid[i] != NULL; i++) {
+        for (int j = 0; grid[i][j] != '\0'; j++) {
+            printf("%c%s", grid[i][j], delim);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
