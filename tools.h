@@ -4,9 +4,9 @@
 
 // Function declarations
 void substring(char *dest, const char *src, int start, int length);
-char *ltrim(char *s);
-char *rtrim(char *s);
-char *trim(char *s);
+void ltrim(char *s);
+void rtrim(char *s);
+void trim(char *s);
 char **str_split(const char *str, const char *delim);
 char *read_line(FILE *file);
 void print_grid(char **grid, char *delim);

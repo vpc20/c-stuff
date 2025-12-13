@@ -5,6 +5,16 @@
 #include "aoc_tools.h"
 #include "tools.h"
 
+// -------------------------------------------------------------------------------
+char *str_add(char str1[]) {
+
+    char str2[] = "added string";
+    char *str3 = (char *) malloc(1000 * sizeof(char));
+    strcat(str1, str2);
+    strcpy(str3, str1);
+    return str3;
+
+}
 
 int main(int argc, char *argv[]) {
     printf("Hello, World!\n");
@@ -91,8 +101,8 @@ int main(int argc, char *argv[]) {
     //-------------------------------------------------------------------------
     // you can use strcpy to copy char *s to char s1[] before trimming
     char s1[] = "  asdf   ";
-    char *trimmed = ltrim(s1);
-    printf("ltrim '%s'\n", trimmed);
+    ltrim(s1);
+    printf("ltrim '%s'\n", s1);
 
     // char *s2 = "  asdf   ";
     // s2 = ltrim(s2);
@@ -103,8 +113,15 @@ int main(int argc, char *argv[]) {
     printf("rtrim '%s'\n", s3);
 
     char s5[] = "  asdf   ";
-    char *trimmeds5 = trim(s5);
-    printf("trim '%s'\n", trimmeds5);
+    trim(s5);
+    printf("trim '%s'\n", s5);
+
+
+    // char s6[] = "test str_add";
+    // char s7[] = "";
+    // // char *s7;
+    // strcpy(s7, str_add(s6));
+    // printf("%s\n", s7);
 
     return 0;
 }

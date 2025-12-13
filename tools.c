@@ -48,24 +48,79 @@ void substring(char *dest, const char *src, int start, int length) {
 
 // -------------------------------------------------------------------------------
 // Trim leading whitespace
-char *ltrim(char *s) {
-    while (isspace((unsigned char)*s))
-        s++;
-    return s;
+// void ltrim(char *s) {
+// while (isspace((unsigned char)*s))
+// s++;
+// return NULL;
+// }
+
+/**
+ * @brief Trims leading spaces from a string in-place.
+ *
+ * This function modifies the string pointed to by 'str' by shifting
+ * all non-space characters to the beginning of the array, effectively
+ * removing any leading space characters. The new string is properly
+ * null-terminated.
+ *
+ * @param str A pointer to the character array (string) to be trimmed.
+ */
+void ltrim(char *str) {
+    if (str == NULL) {
+        return; // Handle NULL pointer case
+    }
+
+    int first_non_space = 0;
+    while (str[first_non_space] != '\0' && str[first_non_space] == ' ') {
+        first_non_space++;
+    }
+
+    if (str[first_non_space] == '\0') {
+        if (first_non_space > 0) {
+            str[0] = '\0';
+        }
+        return;
+    }
+
+    int i, j;
+    for (i = 0, j = first_non_space; str[j] != '\0'; i++, j++) {
+        str[i] = str[j];
+    }
+    str[i] = '\0'; // add null terminator
 }
+
 
 // Trim trailing whitespace
-char *rtrim(char *s) {
-    char *back = s + strlen(s) - 1;
-    while (back >= s && isspace((unsigned char)*back))
-        back--;
-    *(back + 1) = '\0';
-    return s;
+void rtrim(char *s) {
+    if (s == NULL) {
+        return; // Handle NULL pointer case
+    }
+
+    int i = strlen(s) - 1;
+    while (s[i] == ' ') {
+        i--;
+    }
+
+    // if (s[i] == '\0') return; // no need to trim
+
+    s[i + 1] = '\0'; // add null terminator
 }
 
+// char *rtrim(char *s) {
+//     char *back = s + strlen(s) - 1;
+//     while (back >= s && isspace((unsigned char)*back))
+//         back--;
+//     *(back + 1) = '\0';
+//     return s;
+// }
+
 // Trim both leading and trailing whitespace
-char *trim(char *s) {
-    return rtrim(ltrim(s));
+void trim(char *s) {
+    if (s == NULL) {
+        return; // Handle NULL pointer case
+    }
+
+    ltrim(s);
+    rtrim(s);
 }
 
 // -------------------------------------------------------------------------------
