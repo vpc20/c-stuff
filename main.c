@@ -61,9 +61,10 @@ int main(int argc, char *argv[]) {
     // free(parts);
 
     //-------------------------------------------------------------------------
-    // char *substr;
-    // substring(substr, "qwerasdf", 0, 4);
-    // printf("%s\n", substr);
+    // char *substr1 = (char *)malloc(20 * sizeof(char));
+    char substr1[20];
+    substr(substr1, "qwerasdf", 0, 4);
+    printf("%s\n", substr1);
     //
     // substring(substr, "qwerasdf", 1, 4);
     // printf("%s\n", substr);

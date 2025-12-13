@@ -40,7 +40,7 @@
 
 // -------------------------------------------------------------------------------
 // Caller provides the buffer (no allocation needed)
-void substring(char *dest, const char *src, int start, int length) {
+void substr(char *dest, const char *src, int start, int length) {
     // No malloc, no free needed
     strncpy(dest, src + start, length);
     dest[length] = '\0';

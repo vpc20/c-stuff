@@ -3,7 +3,7 @@
 
 
 // Function declarations
-void substring(char *dest, const char *src, int start, int length);
+void substr(char *dest, const char *src, int start, int length);
 void ltrim(char *s);
 void rtrim(char *s);
 void trim(char *s);
